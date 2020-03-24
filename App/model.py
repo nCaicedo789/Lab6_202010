@@ -153,7 +153,7 @@ def getBooksCountByYearRange (catalog, years):
         iteraYear=it.newIterator(yearList)
         while it.hasNext(iteraYear):
             yearElement = it.next(iteraYear)
-            print(yearElement['year'],yearElement['count'])
+            #print(yearElement['year'],yearElement['count'])
             counter += yearElement['count']
         return counter
     return None
