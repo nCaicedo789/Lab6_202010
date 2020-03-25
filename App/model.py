@@ -76,7 +76,7 @@ def newYear (year, row):
     Crea una nueva estructura para almacenar los libros por año 
     """
     yearNode = {"year":year, "ratingMap":None, "count":1}
-    yearNode ['ratingMap'] = map.newMap(11,maptype='CHAINING')
+    yearNode ['ratingMap'] = map.newMap(11,maptype='PROBING')
     intRating = round(float(row['average_rating']))
     map.put(yearNode['ratingMap'],intRating, 1, compareByKey)
     return yearNode
