@@ -75,9 +75,11 @@ def newYear (year, row):
     """
     Crea una nueva estructura para almacenar los libros por año 
     """
-    yearNode = {"year":year, "ratingMap":None, "count":1}
-    yearNode ['ratingMap'] = map.newMap(11,maptype='PROBING')
-    intRating = round(float(row['Severity']))
+    yearNode = {"year":year, "ratingMap":None, "count":1,}
+    yearNode['IDlist']= lt.newList()
+    lt.addLast(yearNode['IDlist'],row['ID'])
+    yearNode ['ratingMap'] = map.newMap(2001,maptype='PROBING')
+    intRating = row['City']
     map.put(yearNode['ratingMap'],intRating, 1, compareByKey)
     return yearNode
 
@@ -92,7 +94,7 @@ def addYearTree (catalog, row):
     yearNode = tree.get(catalog['yearsTree'], year, greater)
     if yearNode:
         yearNode['count']+=1
-        intRating = round(float(row['Severity']))
+        intRating = row['City']
         ratingCount = map.get(yearNode['ratingMap'], intRating, compareByKey)
         if  ratingCount:
             ratingCount+=1
@@ -149,13 +151,24 @@ def getBooksCountByYearRange (catalog, years):
     endYear = strToDate(years.split(" ")[1],'%Y-%m-%d')
     yearList = tree.valueRange(catalog['yearsTree'], startYear, endYear, greater)
     counter = 0
+    cities= map.newMap(2001,maptype='PROBING')
     if yearList:
         iteraYear=it.newIterator(yearList)
         while it.hasNext(iteraYear):
             yearElement = it.next(iteraYear)
             #print(yearElement['year'],yearElement['count'])
             counter += yearElement['count']
-        return counter
+            keys= map.keySet(yearElement['ratingMap'])
+            for i in range(1, lt.size(keys)):
+                city= map.get(cities,i,compareByKey)
+                if city:
+                    city+=1
+                else:
+                    map.put(cities,i,1,compareByKey)
+        map.put(cities,total,counter,compareByKey)
+
+
+        return cities
     return None
 
 
