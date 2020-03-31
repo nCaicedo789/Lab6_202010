@@ -111,7 +111,9 @@ def main():
             years = input("Ingrese los años desde y hasta (%YYYY-%mm-%dd %Y-%m-%dd):")
             counter = controller.getBooksCountByYearRange(catalog, years) 
             if counter:
-                print("Cantidad de accidentes entre las fechas",years,":",map.valueSet(counter))
+                print("Cantidad de accidentes entre las fechas",years,":")
+                for i in range(1,lt.size(counter)):
+                    print(lt.getElement(counter,i))
             else:
                 print("No se encontraron accidentes para el rango de fechas",years)   
         else:
