@@ -112,7 +112,7 @@ def main():
             counter = controller.getBooksCountByYearRange(catalog, years) 
             if counter:
                 print("Cantidad de accidentes entre las fechas",years,":")
-                lista=map.keySet(counter)
+                lista=map.valueSet(counter)
                 for i in range(1,lt.size(lista)):
                     print(lt.getElement(lista,i))
             else:
