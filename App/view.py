@@ -45,7 +45,7 @@ def printMenu():
     print("3- Consultar cuantos libros hay alfabeticamente menores a una llave (titulo) - (rank)")
     print("4- Buscar un libro por posición de la llave (titulo) - (select)")
     print("5- Consultar la cantidad de libros por rating para un año dado")
-    print("6- Consultar la cantidad de libros por rating para un rango de años")
+    print("6- Consultar la cantidad de accidentes por rating para un rango de fechas")
 
     print("0- Salir")
 
@@ -107,12 +107,12 @@ def main():
             else:
                 print("No se encontraron libros para el año",year)
         elif int(inputs[0])==6:
-            years = input("Ingrese los años desde y hasta (YYYY YYYY):")
+            years = input("Ingrese los años desde y hasta (%Y-%m-%d %Y-%m-%d):")
             counter = controller.getBooksCountByYearRange(catalog, years) 
             if counter:
-                print("Cantidad de libros entre los años",years,":",counter)
+                print("Cantidad de accidentes entre las fechas",years,":",counter)
             else:
-                print("No se encontraron libros para el rango de años",years)   
+                print("No se encontraron accidentes para el rango de fechas",years)   
         else:
             sys.exit(0)
     sys.exit(0)

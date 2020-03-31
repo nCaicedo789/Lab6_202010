@@ -42,9 +42,9 @@ def newCatalog():
     """
     catalog = {'booksTitleTree':None,'yearsTree':None,'booksList':None}
     #implementación de Black-Red Tree (brt) por default
-    catalog['booksTitleTree'] = tree.newMap ()
+    catalog['AccidentIDTree'] = tree.newMap ()
     catalog['yearsTree'] = tree.newMap ()
-    catalog['booksList'] = lt.newList("ARRAY_LIST")
+    catalog['AccidentList'] = lt.newList("ARRAY_LIST")
     return catalog
 
 
@@ -52,14 +52,14 @@ def newBook (row):
     """
     Crea una nueva estructura para almacenar un libro 
     """
-    book = {"book_id": row['book_id'], "title":row['title'], "average_rating":row['average_rating'], "ratings_count":row['ratings_count']}
+     book = {"ID": row['ID'], "Severity":row['Severity'], "Start_Time":row['Start_Time']}
     return book
 
 def addBookList (catalog, row):
     """
     Adiciona libro a la lista
     """
-    books = catalog['booksList']
+    books = catalog['AccidentList']
     book = newBook(row)
     lt.addLast(books, book)
 
@@ -69,7 +69,7 @@ def addBookTree (catalog, row):
     """
     book = newBook(row)
     #catalog['booksTitleTree'] = tree.put(catalog['booksTitleTree'], int(book['book_id']), book, greater)
-    catalog['booksTitleTree']  = tree.put(catalog['booksTitleTree'] , book['title'], book, greater)
+    catalog['AccidentIDTree']  = tree.put(catalog['AccidentIDTree'] , book['ID'], book, greater)
 
 def newYear (year, row):
     """
@@ -85,10 +85,10 @@ def addYearTree (catalog, row):
     """
     Adiciona el libro al arbol anual key=original_publication_year
     """
-    yearText= row['original_publication_year']
-    if row['original_publication_year']:
-        yearText=row['original_publication_year'][0:row['original_publication_year'].index('.')]     
-    year = strToDate(yearText,'%Y')
+    yearText= row['Start_Time']
+    if row['Start_Time']:
+        yearText=row['original_publication_year'][0:row['original_publication_year'].index(' ')]     
+    year = strToDate(yearText,'%Y-%m-%d')
     yearNode = tree.get(catalog['yearsTree'], year, greater)
     if yearNode:
         yearNode['count']+=1
