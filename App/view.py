@@ -24,8 +24,9 @@ import sys
 import controller 
 import csv
 from ADT import list as lt
-from ADT import orderedmap as map
+from ADT import orderedmap as tree
 from DataStructures import listiterator as it
+from ADT import map as map
 
 import sys
 
@@ -77,10 +78,10 @@ def main():
             catalog = initCatalog ()
             loadData (catalog)
             print ('Tamaño Lista accidentes cargados: ' + str(lt.size(catalog['AccidentList'])))
-            print ('Tamaño árbol Accidentes por ID: ' + str(map.size(catalog['AccidentIDTree'])))
-            print ('Tamaño árbol accidentes por fecha : ' + str(map.size(catalog['yearsTree'])))
-            print ('Altura árbol por ID: ' + str(map.height(catalog['AccidentIDTree'])))
-            print ('Altura árbol por fecha: ' + str(map.height(catalog['yearsTree'])))
+            print ('Tamaño árbol Accidentes por ID: ' + str(tree.size(catalog['AccidentIDTree'])))
+            print ('Tamaño árbol accidentes por fecha : ' + str(tree.size(catalog['yearsTree'])))
+            print ('Altura árbol por ID: ' + str(tree.height(catalog['AccidentIDTree'])))
+            print ('Altura árbol por fecha: ' + str(tree.height(catalog['yearsTree'])))
         elif int(inputs[0])==2:
             title = input("Nombre del titulo a buscar: ")
             book = controller.getBookTree(catalog,title)
