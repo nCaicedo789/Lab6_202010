@@ -160,12 +160,15 @@ def getBooksCountByYearRange (catalog, years):
             counter += yearElement['count']
             keys= map.keySet(yearElement['ratingMap'])
             for i in range(1, lt.size(keys)):
-                city= map.get(cities,i,compareByKey)
+                city_key= lt.getElement(keys,i)
+                city= map.get(cities,city_key,compareByKey)
                 if city:
-                    city+=1
+                    city['Numero']+=1
                 else:
-                    map.put(cities,i,1,compareByKey)
-        map.put(cities,'total',counter,compareByKey)
+                    ciudad={'ciudad':city_key, 'Numero':1}
+                    map.put(cities,ciudad,1,compareByKey)
+        total={'total':counter}
+        map.put(cities,'total',total,compareByKey)
 
 
         return cities
