@@ -92,7 +92,7 @@ def addYearTree (catalog, row):
     yearNode = tree.get(catalog['yearsTree'], year, greater)
     if yearNode:
         yearNode['count']+=1
-        intRating = round(float(row['average_rating']))
+        intRating = round(float(row['Severity']))
         ratingCount = map.get(yearNode['ratingMap'], intRating, compareByKey)
         if  ratingCount:
             ratingCount+=1
