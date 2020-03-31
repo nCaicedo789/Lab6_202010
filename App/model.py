@@ -145,8 +145,8 @@ def getBooksCountByYearRange (catalog, years):
     Retorna la cantidad de libros por rating para un rango de años
     """
     
-    startYear = strToDate(years.split(" ")[0],'%Y')
-    endYear = strToDate(years.split(" ")[1],'%Y')
+    startYear = strToDate(years.split(" ")[0],'%Y-%m-%d')
+    endYear = strToDate(years.split(" ")[1],'%Y-%m-%d')
     yearList = tree.valueRange(catalog['yearsTree'], startYear, endYear, greater)
     counter = 0
     if yearList:

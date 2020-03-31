@@ -107,7 +107,7 @@ def main():
             else:
                 print("No se encontraron libros para el año",year)
         elif int(inputs[0])==6:
-            years = input("Ingrese los años desde y hasta (%Y-%m-%d %Y-%m-%d):")
+            years = input("Ingrese los años desde y hasta (%YYYY-%mm-%dd %Y-%m-%dd):")
             counter = controller.getBooksCountByYearRange(catalog, years) 
             if counter:
                 print("Cantidad de accidentes entre las fechas",years,":",counter)
