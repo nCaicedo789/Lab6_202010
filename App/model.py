@@ -165,7 +165,7 @@ def getBooksCountByYearRange (catalog, years):
                     city+=1
                 else:
                     map.put(cities,i,1,compareByKey)
-        map.put(cities,total,counter,compareByKey)
+        map.put(cities,'total',counter,compareByKey)
 
 
         return cities
