@@ -151,7 +151,7 @@ def getBooksCountByYearRange (catalog, years):
     endYear = strToDate(years.split(" ")[1],'%Y-%m-%d')
     yearList = tree.valueRange(catalog['yearsTree'], startYear, endYear, greater)
     counter = 0
-    cities= map.newMap(2001,maptype='PROBING')
+    cities= map.newMap(40009,maptype='PROBING')
     if yearList:
         iteraYear=it.newIterator(yearList)
         while it.hasNext(iteraYear):
