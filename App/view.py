@@ -43,7 +43,7 @@ def printMenu():
     print("Bienvenido al Laboratorio 6")
     print("1- Cargar información")
     print("2- Buscar libro por llave (titulo) ")
-    print("3- Consultar cuantos libros hay alfabeticamente menores a una llave (titulo) - (rank)")
+    print("3- Consultar cuántos accidentes ocurrieron antes de una fecha - (rank)")
     print("4- Buscar un libro por posición de la llave (titulo) - (select)")
     print("5- Consultar la cantidad de libros por rating para un año dado")
     print("6- Consultar la cantidad de accidentes por rating para un rango de fechas(requerimiento 3 del reto 3)")
@@ -90,9 +90,9 @@ def main():
             else:
                 print("Libro No encontrado")
         elif int(inputs[0])==3:
-            title = input("Nombre del titulo a buscar (rank): ")
+            title = input("Fecha a buscar: ")
             rank = controller.rankBookTree(catalog,title) 
-            print("Hay ",rank," titulos menores (rank) que "+title)
+            print("Hay ",rank," accidentes antes del "+title)
         elif int(inputs[0])==4:
             pos = int(input("Posición del k-esimo titulo del libro (select) a obtener: "))
             book = controller.selectBookTree(catalog, pos)

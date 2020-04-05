@@ -118,7 +118,9 @@ def rankBookTree (catalog, bookTitle):
     """
     Retorna la cantidad de llaves menores (titulos) dentro del arbol
     """
-    return tree.rank(catalog['booksTitleTree'], bookTitle, greater)
+    print(catalog['yearsTree'])
+    print(bookTitle)
+    return tree.rank(catalog['yearsTree'], bookTitle, greater)
 
 def selectBookTree (catalog, pos):
     """
@@ -199,4 +201,3 @@ def strToDate(date_string, format):
         return datetime.strptime(date_string,format)
     except:
         return datetime.strptime('1900', '%Y')
-
