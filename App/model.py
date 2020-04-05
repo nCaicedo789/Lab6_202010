@@ -122,6 +122,7 @@ def addYearTree (catalog, row):
         catalog['yearsTree']  = tree.put(catalog['yearsTree'] , year, yearNode, greater)
 
 def cambio_de_llaves_valor(catalog,fecha):
+    fecha= strToDate(fecha,'%Y-%m-%d')
     años=tree.get(catalog['yearsTree'],fecha,greater)
     estados= tree.valueSet(años['state'])
     new_tree= tree.newMap()
