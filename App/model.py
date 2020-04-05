@@ -211,6 +211,7 @@ def Accidentes_estado_fecha(catalog, fecha):
     estados= tree.valueSet(arbol_fecha['state'])
     respuesta= {'Estado':None, 'Accidentes':0}
     for i in range(1,lt.size(estados)):
+        respuesta= {'Estado':None, 'Accidentes':0}
         est= lt.getElement(estados,i)
         if respuesta['Accidentes']< est['Accidentes']:
             respuesta= est
