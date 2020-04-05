@@ -43,9 +43,9 @@ def printMenu():
     print("Bienvenido al Laboratorio 6")
     print("1- Cargar información")
     print("2- Buscar libro por llave (titulo) ")
-    print("3- Consultar cuantos libros hay alfabeticamente menores a una llave (titulo) - (rank)")
-    print("4- Buscar un libro por posición de la llave (titulo) - (select)")
-    print("5- Consultar la cantidad de libros por rating para un año dado")
+    print("3- Consultar cuántos accidentes ocurrieron antes de una fecha - (rank)")
+    print("4- Estado con mayor cantidad de accidentes en una fecha dada (req 4)")
+    print("5- Consultar la cantidad de Accidentes por severidad para una fecha dada (req2)")
     print("6- Consultar la cantidad de accidentes por rating para un rango de fechas(requerimiento 3 del reto 3)")
 
     print("0- Salir")
@@ -94,19 +94,19 @@ def main():
             rank = controller.rankBookTree(catalog,date) 
             print("Hay ",rank," titulos menores (rank) que "+date)
         elif int(inputs[0])==4:
-            pos = int(input("Posición del k-esimo titulo del libro (select) a obtener: "))
-            book = controller.selectBookTree(catalog, pos)
-            if book:
-                print("Libro en posición:",pos,":",book['value']['title'],book['value']['average_rating'])
+            fecha= input('ingrese la fehca de la forma %YYYY-%mm-%dd: ')
+            estado= controller.getEstate(catalog,fecha)
+            if estado:
+                print('el estado con mayor cantidad de accidentes en la fecha',fecha,'es ',str(estado['Estado']),'con ', str(estado['Accidentes']), 'accidentes.')
             else:
-                print("Libro no encotrado en posicion: ",pos)
+                print("no se encontro estado ")
         elif int(inputs[0])==5:
-            year = input("Ingrese el año a consultar:")
+            year = input("Ingrese la fecha a consultar:")
             response = controller.getBookByYearRating(catalog, year) 
             if response: 
                 print(response)
             else:
-                print("No se encontraron libros para el año",year)
+                print("No se encontraron Accidentes para la fecha",year)
         elif int(inputs[0])==6:
             years = input("Ingrese los años desde y hasta (%YYYY-%mm-%dd %Y-%m-%dd):")
             counter = controller.getBooksCountByYearRange(catalog, years) 
