@@ -107,7 +107,7 @@ def addYearTree (catalog, row):
             ratingCount['Accidentes']+=1
         else:
             ciudad=  {'Ciudad':row['City'], 'Accidentes':1}
-            map.put(yearNode['ratingMap'], ciudad['ciudad'], ciudad, compareByKey)
+            map.put(yearNode['ratingMap'], ciudad['Ciudad'], ciudad, compareByKey)
 
         
         state= row['State']
