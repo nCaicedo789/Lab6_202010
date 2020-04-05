@@ -140,7 +140,6 @@ def getBooksCountByYearRange (catalog, years):
 
 def getEstate (catalog, year):
     t1_start = process_time() #tiempo inicial
-    model.cambio_de_llaves_valor(catalog,year)
     resp = model.Accidentes_estado_fecha(catalog, year)
     t1_stop = process_time() #tiempo final
     print("Tiempo de ejecución consultar estados por fecha:",t1_stop-t1_start," segundos")   
