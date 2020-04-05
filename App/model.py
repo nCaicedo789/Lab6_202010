@@ -48,11 +48,11 @@ def newCatalog():
     return catalog
 
 
-def newBook (row):
+def newAccident (row):
     """
     Crea una nueva estructura para almacenar un libro 
     """
-    book = {"ID": row['ID'], "Severity":row['Severity'], "Start_Time":row['Start_Time']}
+    book = {"ID": row['ID'], "Severity":row['Severity'], "Start_Time":row['Start_Time'], 'State':row['State']}
     return book
 
 def addBookList (catalog, row):
@@ -67,7 +67,7 @@ def addBookTree (catalog, row):
     """
     Adiciona libro al tree con key=title
     """
-    book = newBook(row)
+    book = newAccident(row)
     #catalog['booksTitleTree'] = tree.put(catalog['booksTitleTree'], int(book['book_id']), book, greater)
     catalog['AccidentIDTree']  = tree.put(catalog['AccidentIDTree'] , book['ID'], book, greater)
 
@@ -75,12 +75,17 @@ def newYear (year, row):
     """
     Crea una nueva estructura para almacenar los libros por año 
     """
-    yearNode = {"year":year, "ratingMap":None, "count":1,}
-    yearNode['IDlist']= lt.newList()
-    lt.addLast(yearNode['IDlist'],row['ID'])
-    yearNode ['ratingMap'] = map.newMap(2001,maptype='PROBING')
-    intRating = row['City']
-    map.put(yearNode['ratingMap'],intRating, 1, compareByKey)
+    yearNode = {"year":year, "ratingMap":None, "count":1,'severity':None, 'state':None}
+    yearNode['severity']= {1:0, 2:0, 3:0, 4:0}
+    sev= int(row['Severity'])
+    yearNode['severity'][sev]+=1
+    yearNode ['ratingMap'] = map.newMap(40009,maptype='PROBING')
+    city = {'Ciudad':row['City'], 'Accidentes':1}
+    map.put(yearNode['ratingMap'],city['Ciudad'], city, compareByKey)
+
+    yearNode['state']= tree.newMap()
+    estado= {'Estado':row['State'], 'Accidentes':1}
+    tree.put(yearNode['state'],estado['state'], estado, greater)
     return yearNode
 
 def addYearTree (catalog, row):
@@ -94,16 +99,39 @@ def addYearTree (catalog, row):
     yearNode = tree.get(catalog['yearsTree'], year, greater)
     if yearNode:
         yearNode['count']+=1
-        intRating = row['City']
-        ratingCount = map.get(yearNode['ratingMap'], intRating, compareByKey)
+        sev= int(row['Severity'])
+        yearNode['severity'][sev]+=1
+        city = row['City']
+        ratingCount = map.get(yearNode['ratingMap'], city, compareByKey)
         if  ratingCount:
-            ratingCount+=1
-            map.put(yearNode['ratingMap'], intRating, ratingCount, compareByKey)
+            ratingCount['Accidentes']+=1
         else:
-            map.put(yearNode['ratingMap'], intRating, 1, compareByKey)
+            ciudad=  {'Ciudad':row['City'], 'Accidentes':1}
+            map.put(yearNode['ratingMap'], ciudad['ciudad'], ciudad, compareByKey)
+
+        
+        state= row['State']
+        state_count= tree.get(yearNode['state'],state,greater)
+        if state_count:
+            state_count['Accidentes']+=1
+        else:
+            estado= {'Estado':row['State'], 'Accidentes':1}
+            tree.put(yearNode['state'], estado['Estado'],estado,greater)
     else:
         yearNode = newYear(year,row)
         catalog['yearsTree']  = tree.put(catalog['yearsTree'] , year, yearNode, greater)
+
+def cambio_de_llaves_valor(catalog):
+    años=catalog['yearsTree']
+    estados= tree.valueSet(años['state'])
+    new_tree= tree.newMap()
+
+    for i in range (1, lt.size(estados)):
+        tree.put(new_tree,i['Accidentes'], i, greater)
+
+    años['state']= new_tree
+
+
 
 # Funciones de consulta
 
@@ -118,9 +146,7 @@ def rankBookTree (catalog, bookTitle):
     """
     Retorna la cantidad de llaves menores (titulos) dentro del arbol
     """
-    print(catalog['yearsTree'])
-    print(bookTitle)
-    return tree.rank(catalog['yearsTree'], bookTitle, greater)
+    return tree.rank(catalog['booksTitleTree'], bookTitle, greater)
 
 def selectBookTree (catalog, pos):
     """
@@ -132,16 +158,14 @@ def getBookByYearRating (catalog, year):
     """
     Retorna la cantidad de libros por rating para un año
     """
-    yearElement=tree.get(catalog['yearsTree'], strToDate(year,'%Y'), greater)
-    response=''
-    if yearElement:
-        ratingList = map.keySet(yearElement['ratingMap'])
-        iteraRating=it.newIterator(ratingList)
-        while it.hasNext(iteraRating):
-            ratingKey = it.next(iteraRating)
-            response += 'Rating '+str(ratingKey) + ':' + str(map.get(yearElement['ratingMap'],ratingKey,compareByKey)) + '\n'
-        return response
-    return None
+    año=strToDate(year,'%Y-%m-%d')
+    yearNode= tree.get(catalog['yearsTree'],año,greater)
+    if yearNode:
+        sev=yearNode['severity']
+        sev['total']= sev[1]+sev[2]+sev[3]+sev[4]
+        return sev
+    else:
+        return None
 
 
 def getBooksCountByYearRange (catalog, years):
@@ -176,6 +200,14 @@ def getBooksCountByYearRange (catalog, years):
         return cities
     return None
 
+def Accidentes_estado_fecha(catalog, fecha):
+    fecha= strToDate(fecha,'%Y-%m-%d')
+    año= tree.get(catalog['yearsTree'],fecha, greater)
+    estdado=tree.max(año['state'])
+    return tree.get(año['state'],estado,greater)
+
+    
+
 
 
 # Funciones de comparacion
@@ -201,3 +233,4 @@ def strToDate(date_string, format):
         return datetime.strptime(date_string,format)
     except:
         return datetime.strptime('1900', '%Y')
+
