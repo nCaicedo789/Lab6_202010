@@ -209,7 +209,6 @@ def Accidentes_estado_fecha(catalog, fecha):
     fecha= strToDate(fecha,'%Y-%m-%d')
     arbol_fecha= tree.get(catalog['yearsTree'],fecha,greater)
     estados= tree.valueSet(arbol_fecha['state'])
-    respuesta= {'Estado':None, 'Accidentes':0}
     for i in range(1,lt.size(estados)):
         respuesta= {'Estado':None, 'Accidentes':0}
         est= lt.getElement(estados,i)
