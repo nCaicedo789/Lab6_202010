@@ -204,7 +204,8 @@ def Accidentes_estado_fecha(catalog, fecha):
     fecha= strToDate(fecha,'%Y-%m-%d')
     año= tree.get(catalog['yearsTree'],fecha, greater)
     estado=tree.max(año['state'])
-    return estado
+    valor=tree.valueSet(estado)
+    return lt.firstElement(valor)
 
     
 
