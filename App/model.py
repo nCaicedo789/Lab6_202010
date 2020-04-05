@@ -203,7 +203,7 @@ def getBooksCountByYearRange (catalog, years):
 def Accidentes_estado_fecha(catalog, fecha):
     fecha= strToDate(fecha,'%Y-%m-%d')
     año= tree.get(catalog['yearsTree'],fecha, greater)
-    estdado=tree.max(año['state'])
+    estado=tree.max(año['state'])
     return tree.get(año['state'],estado,greater)
 
     
