@@ -97,6 +97,7 @@ def main():
             fecha= input('ingrese la fehca de la forma %YYYY-%mm-%dd')
             estado= controller.getEstate(catalog,fecha)
             if estado:
+                print(estado)
                 print('el estado con mayor cantidad de accidentes en la fecha',fecha,'es ',str(estado['Estado']),'con ', str(estado['Accidentes'], 'accidentes.'))
             else:
                 print("no se encontro estado ")
