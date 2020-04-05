@@ -128,7 +128,10 @@ def cambio_de_llaves_valor(catalog,fecha):
 
     for i in range (1, lt.size(años)):
         elemento=lt.getElement(años,i)
-        tree.put(new_tree,elemento['Accidentes'], elemento, greater)
+        estados= tree.valueSet(elemento['state'])
+        for x in range(1,lt.size(estados)):
+            lt.getElement(estados,x)
+            tree.put(new_tree,elemento['Accidentes'], elemento, greater)
 
     años['state']= new_tree
 
@@ -203,12 +206,16 @@ def getBooksCountByYearRange (catalog, years):
     return None
 
 def Accidentes_estado_fecha(catalog, fecha):
-    cambio_de_llaves_valor(catalog,fecha)
     fecha= strToDate(fecha,'%Y-%m-%d')
-    año= tree.get(catalog['yearsTree'],fecha, greater)
-    estado=tree.max(año['state'])
-    valor=tree.valueSet(estado)
-    return lt.firstElement(valor)
+    arbol_fecha= tree.get(catalog['yearsTree'],fecha,greater)
+    estados= tree.valueSet(arbol_fecha['state'])
+    respuesta= {'Estado':None, 'Accidentes':0}
+    for i in range(1,lt.size(estados)):
+        est= lt.getElement(estados,i)
+        if respuesta['Accidentes']< est['Accidentes']:
+            respuesta= est
+    return respuesta
+
 
     
 
