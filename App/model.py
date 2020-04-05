@@ -60,7 +60,7 @@ def addBookList (catalog, row):
     Adiciona libro a la lista
     """
     books = catalog['AccidentList']
-    book = newBook(row)
+    book = newAccident(row)
     lt.addLast(books, book)
 
 def addBookTree (catalog, row):
