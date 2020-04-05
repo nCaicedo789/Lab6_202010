@@ -90,9 +90,9 @@ def main():
             else:
                 print("Libro No encontrado")
         elif int(inputs[0])==3:
-            title = input("Nombre del titulo a buscar (rank): ")
-            rank = controller.rankBookTree(catalog,title) 
-            print("Hay ",rank," titulos menores (rank) que "+title)
+            date = input("Ingrese la fecha en formato anio-mes-dia: ")
+            rank = controller.rankBookTree(catalog,date) 
+            print("Hay ",rank," titulos menores (rank) que "+date)
         elif int(inputs[0])==4:
             pos = int(input("Posición del k-esimo titulo del libro (select) a obtener: "))
             book = controller.selectBookTree(catalog, pos)

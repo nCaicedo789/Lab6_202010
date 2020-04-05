@@ -118,7 +118,7 @@ def rankBookTree (catalog, bookTitle):
     """
     Retorna la cantidad de llaves menores (titulos) dentro del arbol
     """
-    return tree.rank(catalog['booksTitleTree'], bookTitle, greater)
+    return tree.rank(catalog['AccidentIDTree'], bookTitle, greater)
 
 def selectBookTree (catalog, pos):
     """
@@ -185,6 +185,7 @@ def compareByTitle(bookTitle, element):
     return  (bookTitle == element['title'] )
 
 def greater (key1, key2):
+    
     if ( key1 == key2):
         return 0
     elif (key1 < key2):
