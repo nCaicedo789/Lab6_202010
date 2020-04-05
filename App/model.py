@@ -85,7 +85,7 @@ def newYear (year, row):
 
     yearNode['state']= tree.newMap()
     estado= {'Estado':row['State'], 'Accidentes':1}
-    tree.put(yearNode['state'],estado['state'], estado, greater)
+    tree.put(yearNode['state'],estado['Estado'], estado, greater)
     return yearNode
 
 def addYearTree (catalog, row):
