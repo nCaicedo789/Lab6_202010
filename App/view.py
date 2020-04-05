@@ -94,7 +94,7 @@ def main():
             rank = controller.rankBookTree(catalog,title) 
             print("Hay ",rank," accidentes antes del "+title)
         elif int(inputs[0])==4:
-            fecha= input('ingrese la fehca de la forma %YYYY-%mm-%dd')
+            fecha= input('ingrese la fehca de la forma %YYYY-%mm-%dd: ')
             estado= controller.getEstate(catalog,fecha)
             if estado:
                 print('el estado con mayor cantidad de accidentes en la fecha',fecha,'es ',str(estado['Estado']),'con ', str(estado['Accidentes']), 'accidentes.')
