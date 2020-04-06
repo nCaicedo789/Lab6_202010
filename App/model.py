@@ -146,12 +146,12 @@ def getBookTree (catalog, bookTitle):
     """
     return tree.get(catalog['booksTitleTree'], bookTitle, greater)
 
-def rankBookTree (catalog, bookTitle):
+def rankBookTree (catalog, fecha):
     """
     Retorna la cantidad de llaves menores (titulos) dentro del arbol
     """
-   
-    return tree.rank(catalog['AccidentIDTree'], bookTitle, greater)
+    fecha= strToDate(fecha,'%Y-%m-%d')
+    return tree.rank(catalog['yearsTree'], fecha, greater)
 
 def selectBookTree (catalog, pos):
     """
