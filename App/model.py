@@ -45,8 +45,17 @@ def newCatalog():
     catalog['AccidentIDTree'] = tree.newMap ()
     catalog['yearsTree'] = tree.newMap ()
     catalog['AccidentList'] = lt.newList("ARRAY_LIST")
+    catalog['yearsTree_rank']=tree.newMap()
     return catalog
 
+def newTree_rank(row):
+    fecha= strToDate(row['Start_Time'],'%Y/%m/%d %H:%M:%S')
+    fecha_map={'fecha':fecha, 'Accidentes':1}
+    return fecha
+
+def addTree_rank(catalog, row):
+    accidente= newTree_rank(row)
+    tree.put(catalog['yearsTree_rank'],accidente['fecha'],accidente, greater)
 
 def newAccident (row):
     """
@@ -150,8 +159,9 @@ def rankBookTree (catalog, fecha):
     """
     Retorna la cantidad de llaves menores (titulos) dentro del arbol
     """
-    fecha= strToDate(fecha,'%Y-%m-%d')
-    return tree.rank(catalog['yearsTree'], fecha, greater)
+    fecha=fecha+str( 00:00:00)
+    fecha= strToDate(fecha,'%Y/%m/%d %H:%M:%S')
+    return tree.rank(catalog['yearsTree_rank'], fecha, greater)
 
 def selectBookTree (catalog, pos):
     """
