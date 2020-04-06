@@ -160,7 +160,7 @@ def rankBookTree (catalog, fecha):
     Retorna la cantidad de llaves menores (titulos) dentro del arbol
     """
     fecha=fecha+' 00:00:00'
-    fecha= strToDate(fecha,'%Y/%m/%d %H:%M:%S')
+    fecha= strToDate(fecha,'%Y/%m/%d')
     return tree.rank(catalog['yearsTree_rank'], fecha, greater)
 
 def selectBookTree (catalog, pos):
