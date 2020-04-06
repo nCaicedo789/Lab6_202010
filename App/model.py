@@ -55,7 +55,7 @@ def newTree_rank(row):
 
 def addTree_rank(catalog, row):
     accidente= newTree_rank(row)
-    tree.put(catalog['yearsTree_rank'],accidente['fecha'],accidente, greater)
+    catalog['yearsTree_rank']=tree.put(catalog['yearsTree_rank'],accidente['fecha'],accidente, greater)
 
 def newAccident (row):
     """
