@@ -51,7 +51,7 @@ def newCatalog():
 def newTree_rank(row):
     fecha= strToDate(row['Start_Time'],'%Y/%m/%d %H:%M:%S')
     fecha_map={'fecha':fecha, 'Accidentes':1}
-    return fecha
+    return fecha_map
 
 def addTree_rank(catalog, row):
     accidente= newTree_rank(row)
