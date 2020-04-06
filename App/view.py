@@ -43,10 +43,10 @@ def printMenu():
     print("Bienvenido al Laboratorio 6")
     print("1- Cargar información")
     print("2- Buscar libro por llave (titulo) ")
-    print("3- Consultar cuántos accidentes ocurrieron antes de una fecha - (rank)")
+    print("3- Consultar cuántos accidentes ocurrieron antes de una fecha - (req1)")
     print("4- Estado con mayor cantidad de accidentes en una fecha dada (req 4)")
     print("5- Consultar la cantidad de Accidentes por severidad para una fecha dada (req2)")
-    print("6- Consultar la cantidad de accidentes por rating para un rango de fechas(requerimiento 3 del reto 3)")
+    print("6- Consultar la cantidad de accidentes por rating para un rango de fechas(req 3)")
 
     print("0- Salir")
 
@@ -92,7 +92,7 @@ def main():
         elif int(inputs[0])==3:
             date = input("Ingrese la fecha en formato anio-mes-dia: ")
             rank = controller.rankBookTree(catalog,date) 
-            print("Hay ",rank," titulos menores (rank) que "+date)
+            print("Hay ",rank," accidentes antes de "+date)
         elif int(inputs[0])==4:
             fecha= input('ingrese la fehca de la forma %YYYY-%mm-%dd: ')
             estado= controller.getEstate(catalog,fecha)
@@ -101,7 +101,7 @@ def main():
             else:
                 print("no se encontro estado ")
         elif int(inputs[0])==5:
-            year = input("Ingrese la fecha a consultar:")
+            year = input("Ingrese la fecha a consultar de la forma %YYYY-%mm-%dd::")
             response = controller.getBookByYearRating(catalog, year) 
             if response: 
                 print(response)
